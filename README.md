@@ -3,7 +3,7 @@
 ## Domain Proyek
 
 <p align="center">
-  <img src="Assets/image-14.png" alt="Domain Proyek" width="50%">
+  <img src="Assets/image-14.png" alt="Domain Proyek" width="100%">
 </p>
 
 Indeks prestasi siswa merupakan salah satu indikator penting dalam menilai kinerja akademis siswa. Mengetahui faktor-faktor yang memengaruhi indeks prestasi siswa dapat membantu institusi pendidikan dalam merancang strategi yang efektif untuk meningkatkan kualitas pendidikan. Penelitian menunjukkan bahwa prestasi siswa dipengaruhi oleh berbagai faktor, baik internal seperti psikologi dan motivasi, maupun eksternal seperti jumlah jam belajar, lingkungan, dan keaktifan berorganisasi [[1]](https://journal.univawalbros.ac.id/index.php/jham/article/view/56)[[2]](https://ojs.unimal.ac.id/averrous/article/view/3040). Masalah ini penting untuk diselesaikan karena indeks prestasi yang baik tidak hanya mencerminkan kemampuan akademis siswa, tetapi juga dapat mempengaruhi masa depan mereka dalam hal peluang pendidikan lanjutan dan karir [[3]](https://www.researchgate.net/publication/372790243_Penerapan_Data_Mining_Untuk_Memprediksi_Prestasi_Akademik_Mahasiswa_Menggunakan_Algoritma_C45_dengan_CRISP-DM).
@@ -17,7 +17,7 @@ Dengan demikian, proyek ini bertujuan untuk mengembangkan model *machine learnin
 ## Business Understanding
 
 <p align="center">
-    <img src="Assets/image-15.png" alt="Business Understanding" width="50%">
+    <img src="Assets/image-15.png" alt="Business Understanding" width="100%">
 </p>
 
 ### Problem Statements
@@ -35,6 +35,7 @@ Berdasarkan problem statements, berikut tujuan yang ingin dicapai pada proyek in
 3. Membuat model *machine learning* yang dapat melakukan prediksi indeks prestasi siswa.
 
 ### Solution statements
+
 1. Melakukan proses *Exploratory Data Analysis* (EDA) untuk mengetahui faktor-faktor yang memengaruhi indeks prestasi siswa.
 2. Menggunakan 3 model *machine learning* untuk memprediksi indeks prestasi pada siswa, yaitu *K-Nearest Neighbors* (KNN), *Random Forest*, dan *Support Vector Machine* (SVM).
 3. Menggunakan metrik `MSE` dan `RMSE` pada masing-masing model *machine learning* untuk menemukan model terbaik berdasarkan akurasi tertinggi.
@@ -42,7 +43,7 @@ Berdasarkan problem statements, berikut tujuan yang ingin dicapai pada proyek in
 ## Data Understanding
 
 <p align="center">
-  <img src="Assets/image-16.png" alt="Data Understanding" width="50%">
+  <img src="Assets/image-16.png" alt="Data Understanding" width="100%">
 </p>
 
 Dataset yang digunakan untuk memprediksi indeks prestasi pada siswa diambil dari platform [kaggle](https://www.kaggle.com/) yang dipublikasikan oleh `nikhil7280` dengan usability score `10/10`. Dataset ini memiliki `10.000` baris dengan `6` kolom dan terdiri dari `1` file csv.
@@ -66,6 +67,7 @@ Yes | Siswa berpartisipasi dalam kegiatan ekstrakurikuler.
 No | Siswa tidak berpartisipasi dalam kegiatan ekstrakurikuler.
 
 ### Data Cleaning
+
 Setelah diperiksa apakah terdapat kolom yang bernilai null, hasilnya adalah tidak ada. Sementara itu, setelah diperiksa apakah terdapat data duplikat, ditemukan 127 duplikat, sehingga data duplikat ini dihapus. Oleh karena itu, setelah dilakukan pembersihan data, diperoleh deskripsi statistik data numerik sebagai berikut:
 | Statistic   | Hours Studied | Previous Scores | Sleep Hours | Sample Question Papers Practiced | Performance Index |
 |-------------|---------------|------------------|-------------|------------------------------------|-------------------|
@@ -80,7 +82,9 @@ Setelah diperiksa apakah terdapat kolom yang bernilai null, hasilnya adalah tida
 
 Dari hasil tersebut, dapat disimpulkan bahwa rata-rata dari variabel `Hours Studied` adalah 4.9, `Previous Scores` adalah 69.5, `Sleep Hours` adalah 6.5, `Sample Question Papers Practiced` adalah 4.5, dan `Performance Index` adalah 55.2.
 
-![alt text](Assets/image.png)
+<p align="center">
+  <img src="Assets/image.png" alt="Data Understanding" width="100%">
+</p>
 
 Dari hasil di atas, terlihat bahwa tidak ada data outlier pada dataset ini. Sehingga, kita dapat melanjutkan ke tahap berikutnya.
 
@@ -93,13 +97,17 @@ Dari variabel-variabel yang diketahui, variabel dapat dibagi menjadi 2 jenis, ya
 
 Pertama, kita akan memvisualisasikan kolom-kolom kategorikal untuk melihat jumlah-jumlah nilai kategorikal menggunakan pie chart.
 
-![alt text](Assets/image-1.png)
+<p align="center">
+  <img src="Assets/image-1.png" alt="Data Understanding" width="50%">
+</p>
 
 Dari hasil di atas, terlihat bahwa jumlah siswa yang melakukan aktivitas ekstrakurikuler ($49.5\%$) lebih sedikit dibandingkan dengan yang tidak melakukan aktivitas ekstrakurikuler ($50.5\%$).
 
 Selanjutnya, kita akan memvisualisasikan kolom-kolom numerikal untuk melihat distribusi data menggunakan histogram.
 
-![alt text](Assets/image-2.png)
+<p align="center">
+  <img src="Assets/image-2.png" alt="Data Understanding" width="100%">
+</p>
 
 Gambar di atas dapat diinterpretasikan sebagai berikut:
 1. Plot Histogram dari `Jumlah Jam Belajar`, `Nilai sebelumnya`, `Jumlah Jam Tidur`, dan `Jumlah Soal Latihan Yang Dikerjakan` tidak berdistribusi normal.
@@ -109,61 +117,81 @@ Gambar di atas dapat diinterpretasikan sebagai berikut:
 
 #### 1. Membandingkan Tingkat Hours Studied Pada Setiap Performance Index
 
-![alt text](Assets/image-3.png)
+<p align="center">
+  <img src="Assets/image-3.png" alt="Data Understanding" width="75%">
+</p>
 
 Dari hasil di atas, terlihat bahwa semakin banyak jam belajar, maka semakin tinggi pula indeks prestasi yang didapat.
 
 #### 2. Membandingkan Tingkat Previous Scores Pada Setiap Performance Index
 
-![alt text](Assets/image-4.png)
+<p align="center">
+  <img src="Assets/image-4.png" alt="Data Understanding" width="75%">
+</p>
 
 Dari hasil di atas, terlihat bahwa semakin tinggi nilai sebelumnya, maka semakin tinggi pula indeks prestasi yang didapat.
 
 #### 3. Membandingkan Tingkat Sleep Hours Pada Setiap Performance Index
 
-![alt text](Assets/image-5.png)
+<p align="center">
+  <img src="Assets/image-5.png" alt="Data Understanding" width="75%">
+</p>
 
 Dari hasil di atas, terlihat bahwa semakin banyak jam tidur, maka semakin tinggi pula indeks prestasi yang didapat.
 
 #### 4. Membandingkan Tingkat Sample Question Papers Practiced Pada Setiap Performance Index
 
-![alt text](Assets/image-6.png)
+<p align="center">
+  <img src="Assets/image-6.png" alt="Data Understanding" width="75%">
+</p>
 
 Dari hasil di atas, terlihat bahwa semakin banyak soal latihan yang dikerjakan, maka semakin tinggi pula indeks prestasi yang didapat.
 
 #### 5. Membandingkan Tingkat Hours Studied Dengan Extracurricular Activities
 
-![alt text](Assets/image-7.png)
+<p align="center">
+  <img src="Assets/image-7.png" alt="Data Understanding" width="75%">
+</p>
 
 Data di atas menunjukkan bahwa siswa yang melakukan aktivitas ekstrakurikuler memiliki jumlah jam belajar yang lebih tinggi dibandingkan dengan yang tidak melakukan aktivitas ekstrakurikuler.
 
 #### 6. Membandingkan Tingkat Previous Scores Dengan Extracurricular Activities
 
-![alt text](Assets/image-8.png)
+<p align="center">
+  <img src="Assets/image-8.png" alt="Data Understanding" width="75%">
+</p>
 
 Data di atas menunjukkan bahwa siswa yang melakukan aktivitas ekstrakurikuler memiliki nilai sebelumnya yang lebih tinggi dibandingkan dengan yang tidak melakukan aktivitas ekstrakurikuler.
 
 #### 7. Membandingkan Tingkat Sleep Hours Dengan Extracurricular Activities
 
-![alt text](Assets/image-9.png)
+<p align="center">
+  <img src="Assets/image-9.png" alt="Data Understanding" width="75%">
+</p>
 
 Data di atas menunjukkan bahwa siswa yang melakukan aktivitas ekstrakurikuler memiliki jumlah jam tidur yang lebih tinggi dibandingkan dengan yang tidak melakukan aktivitas ekstrakurikuler.
 
 #### 8. Membandingkan Tingkat Sample Question Papers Practiced Dengan Extracurricular Activities
 
-![alt text](Assets/image-10.png)
+<p align="center">
+  <img src="Assets/image-10.png" alt="Data Understanding" width="75%">
+</p>
 
 Data di atas menunjukkan bahwa siswa yang melakukan aktivitas ekstrakurikuler menghabiskan lebih banyak waktu untuk mengerjakan soal latihan dibandingkan dengan yang tidak melakukan aktivitas ekstrakurikuler.
 
 #### 9. Membandingkan Tingkat Performance Index Dengan Extracurricular Activities
 
-![alt text](Assets/image-11.png)
+<p align="center">
+  <img src="Assets/image-11.png" alt="Data Understanding" width="75%">
+</p>
 
 Data di atas menunjukkan bahwa siswa yang melakukan aktivitas ekstrakurikuler memiliki indeks prestasi yang lebih tinggi dibandingkan dengan yang tidak melakukan aktivitas ekstrakurikuler.
 
 #### 10. Melihat Korelasi Variabel dengan Menggunakan Heatmap
 
-![alt text](Assets/image-12.png)
+<p align="center">
+  <img src="Assets/image-12.png" alt="Data Understanding" width="100%">
+</p>
 
 Dari heatmap di atas, dapat dilihat bahwa `Indeks Prestasi` memiliki:
 1. Korelasi positif yang kuat dengan `Nilai Sebelumnya`.
@@ -173,7 +201,7 @@ Dari heatmap di atas, dapat dilihat bahwa `Indeks Prestasi` memiliki:
 ## Data Preparation
 
 <p align="center">
-  <img src="Assets/image-17.png" alt="Data Preparation" width="50%">
+  <img src="Assets/image-17.png" alt="Data Preparation" width="100%">
 </p>
 
 Pertama, akan diubah nilai-nilai kategorikal pada data menggunakan fungsi `.map()` sehingga menjadi nilai-nilai numerik agar dapat dilatih dengan *machine learning*.
@@ -214,6 +242,7 @@ Algoritma ini bekerja dengan membentuk decision trees, lalu menggunakan sampiing
 Pada pemodelan ini, *Random Forest* diimplementasikan menggunakan `RandomForestRegressor` dari library `sklearn.ensemble` dengan memasukkan `X_train` dan `y_train` untuk melatih model, lalu menggunakan `X_test` dan `y_test` untuk menguji model dengan data testing yang tidak ada di data training. Parameter yang digunakan pada model ini adalah `n_estimators` yaitu jumlah tree yang akan dibuat, `max_depth` yaitu kedalaman maksimum setiap tree, `random_state` yaitu mengontrol seed acak yang diberikan pada setiap iterasi, dan `n_jobs` yaitu jumlah pekerjaan yang akan dijalankan secara paralel. Pada proyek ini, parameter yang digunakan adalah `n_estimators = 50`, `max_depth = 16`, `random_state = 55`, dan `n_jobs = -1`.
 
 ### 3. Support Vector Machine (SVM)
+
 Algoritma ini bekerja dengan mencari hyperplane terbaik untuk memisahkan kelas-kelas fitur serta menggunakan fungsi kernel untuk mentransformasikan data ke dimensi yang lebih tinggi agar dapat dipisahkan apabila pemisahan linier tidak memungkinkan. Kelebihan dari algoritma ini adalah efektif untuk dimensi tinggi, penggunaan memori yang efisien, efektif untuk kasus dimana jumlah dimensi lebih besar dari jumlah sampel, bekerja relatif baik ketika ada margin pemisahan yang jelas antar kelas, dan dapat menggunakan fungsi kernel apapun. Sedangkan kekurangan dari algoritma ini adalah tidak cocok untuk dataset berukuran besar karena membutuhkan waktu training yang lama, memiliki performa buruk untuk data yang noisy ataupun tidak bersih, dan beban komputasi yang tinggi karena SVM bekerja dengan meletakkan titik data di atas dan di bawah hyperplane sehingga tidak ada kejelasan probabilistik untuk klasifikasi tersebut.
 
 <p align="center">
@@ -229,7 +258,7 @@ Setelah semua model dijalankan, penulis memilih algoritma *SVM* sebagai model te
 ## Evaluation
 
 <p align="center">
-  <img src="Assets/image-18.png" alt="Evaluation Image" width="50%">
+  <img src="Assets/image-18.png" alt="Evaluation Image" width="75%">
 </p>
 
 Pada proyek ini, penilaian model menggunakan `MSE` dan `RMSE` sebagai metrik evaluasi untuk masing-masing model. Akan dijelaskan terlebih dahulu apa itu `MSE` dan `RMSE`, dan bagaimana cara menghitungnya.
@@ -275,12 +304,13 @@ Dari tabel di atas, dapat disimpulkan bahwa:
 
 ### Visualisasi Hasil Evaluasi
 
-![alt text](Assets/image-13.png)
+<p align="center">
+  <img src="Assets/image-13.png" alt="Data Understanding" width="50%">
+</p>
 
 Dari grafik di atas, terlihat bahwa model `Support Vector Machine (SVM)` memiliki nilai `MSE` dan `RMSE` yang lebih kecil dibandingkan dengan model `Random Forest (RF)` dan `K-Nearest Neighbors (KNN)` pada data testing. Sehingga, model `Support Vector Machine (SVM)` dipilih sebagai model terbaik untuk memprediksi indeks prestasi siswa.
 
 ### Membandingkan Hasil Prediksi dengan Nilai Aktual
-
 
 | y_true | prediksi_KNN | prediksi_RF | prediksi_SVM |
 |--------|--------------|-------------|--------------|
