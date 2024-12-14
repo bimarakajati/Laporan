@@ -190,7 +190,7 @@ Data di atas menunjukkan bahwa siswa yang melakukan aktivitas ekstrakurikuler me
 #### 10. Melihat Korelasi Variabel dengan Menggunakan Heatmap
 
 <p align="center">
-  <img src="Assets/image-12.png" alt="Data Understanding" width="100%">
+  <img src="Assets/image-12.png" alt="Data Understanding" width="75%">
 </p>
 
 Dari heatmap di atas, dapat dilihat bahwa `Indeks Prestasi` memiliki:
@@ -226,7 +226,7 @@ Ada 3 algoritma *Machine Learning* yang digunakan untuk membuat model, yaitu seb
 Algoritma ini bekerja dengan mengklasifikasikan titik data berdasarkan kelas mayoritas dari sejumlah k tetangga terdekatnya. Kelebihan dari algoritma ini adalah mudah dan simple untuk digunakan atau dipelajari oleh *data scientist* pemula, mudah beradaptasi atau menyesuaikan untuk ikut memperhitungkan data baru karena semua data pelatihan disimpan ke dalam memori, memiliki sedikit *hyperparameter* seperti nilai `k` dan `metrik jarak` jika dibandingkan dengan algoritma machine learning lainnya, tangguh terhadap training data yang memiliki banyak noise, dan efektif apabila training datanya besar. Sementara itu, kekurangan dari algoritma ini adalah sensitif terhadap pemilihan `k` dan `metrik jarak`, tidak berfungsi dengan baik pada dataset berukuran besar, dan kurang cocok untuk data berdimensi tinggi (*curse of dimensionality*) karena menjadi sulit bagi algoritma untuk menghitung jarak di setiap dimensi.
 
 <p align="center">
-  <img src="Assets/image-21.png" alt="KNN" width="50%">
+  <img src="Assets/image-21.png" alt="KNN" width="75%">
 </p>
 
 Pada pemodelan ini, KNN diimplementasikan menggunakan `KNeighborsRegressor` dari library `sklearn.neighbors` dengan memasukkan `X_train` dan `y_train` untuk melatih model, lalu menggunakan `X_test` dan `y_test` untuk menguji model dengan data testing yang tidak ada di data training. Parameter yang digunakan pada model ini adalah `n_neighbors` yaitu jumlah k tetangga. Pada proyek ini, parameter yang digunakan adalah `n_neighbors = 10` untuk mendapatkan hasil terbaik.
@@ -236,7 +236,7 @@ Pada pemodelan ini, KNN diimplementasikan menggunakan `KNeighborsRegressor` dari
 Algoritma ini bekerja dengan membentuk decision trees, lalu menggunakan sampiing dengan penggantian (*bootstrapping*) dan pemilihan fitur acak untuk setiap pohon agar pohon-pohon menjadi beragam. Kelebihan dari algoritma ini adalah memiliki akurasi tinggi karena menggunakan pendekatan ensemble, mencegah *overfitting* dengan jumlah pohon yang banyak, kuat terhadap data outlier (pencilan data), bekerja dengan baik dengan data non-linear, dan mampu menangani dataset berukuran besar dan multi dimensi. Sedangkan kekurangan dari algoritma ini adalah cenderung bias saat berhadapan dengan variabel kategorikal, tidak cocok untuk metode linier dengan banyak fitur sparse, dan komputasi yang besar untuk jumlah pohon yang besar dan membutuhkan memori yang besar untuk menyimpan seluruh pohon.
 
 <p align="center">
-  <img src="Assets/image-19.png" alt="RF" width="50%">
+  <img src="Assets/image-19.png" alt="RF" width="75%">
 </p>
 
 Pada pemodelan ini, *Random Forest* diimplementasikan menggunakan `RandomForestRegressor` dari library `sklearn.ensemble` dengan memasukkan `X_train` dan `y_train` untuk melatih model, lalu menggunakan `X_test` dan `y_test` untuk menguji model dengan data testing yang tidak ada di data training. Parameter yang digunakan pada model ini adalah `n_estimators` yaitu jumlah tree yang akan dibuat, `max_depth` yaitu kedalaman maksimum setiap tree, `random_state` yaitu mengontrol seed acak yang diberikan pada setiap iterasi, dan `n_jobs` yaitu jumlah pekerjaan yang akan dijalankan secara paralel. Pada proyek ini, parameter yang digunakan adalah `n_estimators = 50`, `max_depth = 16`, `random_state = 55`, dan `n_jobs = -1`.
@@ -246,7 +246,7 @@ Pada pemodelan ini, *Random Forest* diimplementasikan menggunakan `RandomForestR
 Algoritma ini bekerja dengan mencari hyperplane terbaik untuk memisahkan kelas-kelas fitur serta menggunakan fungsi kernel untuk mentransformasikan data ke dimensi yang lebih tinggi agar dapat dipisahkan apabila pemisahan linier tidak memungkinkan. Kelebihan dari algoritma ini adalah efektif untuk dimensi tinggi, penggunaan memori yang efisien, efektif untuk kasus dimana jumlah dimensi lebih besar dari jumlah sampel, bekerja relatif baik ketika ada margin pemisahan yang jelas antar kelas, dan dapat menggunakan fungsi kernel apapun. Sedangkan kekurangan dari algoritma ini adalah tidak cocok untuk dataset berukuran besar karena membutuhkan waktu training yang lama, memiliki performa buruk untuk data yang noisy ataupun tidak bersih, dan beban komputasi yang tinggi karena SVM bekerja dengan meletakkan titik data di atas dan di bawah hyperplane sehingga tidak ada kejelasan probabilistik untuk klasifikasi tersebut.
 
 <p align="center">
-  <img src="Assets/image-20.png" alt="SVM" width="50%">
+  <img src="Assets/image-20.png" alt="SVM" width="75%">
 </p>
 
 Pada pemodelan ini, SVM diimplementasikan menggunakan `SVR` dari library `sklearn.svm` dengan memasukkan `X_train` dan `y_train` untuk melatih model, lalu menggunakan `X_test` dan `y_test` untuk menguji model dengan data testing yang tidak ada di data training. Parameter yang digunakan pada model ini adalah `kernel` yaitu tipe kernel yang digunakan untuk mentransformasikan input data, `C` yaitu parameter penalti dari error, `epsilon` yaitu lebaran tube yang digunakan untuk mengontrol margin error. Pada proyek ini, parameter yang digunakan adalah `kernel = 'linear'`, `C = 1.0`, dan `epsilon = 0.1`.
@@ -305,7 +305,7 @@ Dari tabel di atas, dapat disimpulkan bahwa:
 ### Visualisasi Hasil Evaluasi
 
 <p align="center">
-  <img src="Assets/image-13.png" alt="Data Understanding" width="50%">
+  <img src="Assets/image-13.png" alt="Data Understanding" width="75%">
 </p>
 
 Dari grafik di atas, terlihat bahwa model `Support Vector Machine (SVM)` memiliki nilai `MSE` dan `RMSE` yang lebih kecil dibandingkan dengan model `Random Forest (RF)` dan `K-Nearest Neighbors (KNN)` pada data testing. Sehingga, model `Support Vector Machine (SVM)` dipilih sebagai model terbaik untuk memprediksi indeks prestasi siswa.
@@ -357,12 +357,12 @@ Secara keseluruhan, model Support Vector Machine (SVM) dipilih sebagai model ter
 
 ## Referensi
 
-[1] A. Zaky, S.B. Prathivi, "THE EFFECT OF LEARNING HOURS, ENVIRONMENT AND ORGANIZATIONAL ACTIVITY ON STUDENT ACHIEVEMENT INDEX OF STIKES AWAL BROS PEKANBARU", Retrieved from: https://journal.univawalbros.ac.id/index.php/jham/article/view/56
+[1] A. Zaky, S.B. Prathivi, "The Effect of Learning Hours, Environment and Organizational Activity on Student Achievement Index of Stikes Awal Bros Pekanbaru", Retrieved from: https://journal.univawalbros.ac.id/index.php/jham/article/view/56
 
-[2] M.R. Ramadhan, H. Husnah, Z. Zahra, "HUBUNGAN KECERDASAN EMOSIONAL DAN STATUS GIZI DENGAN PRESTASI BELAJAR SISWA SMA NEGERI UNGGUL KOTA SUBULUSSALAM", Retrieved from: https://ojs.unimal.ac.id/averrous/article/view/3040
+[2] M.R. Ramadhan, H. Husnah, Z. Zahra, "Hubungan Kecerdasan Emosional Dan Status Gizi Dengan Prestasi Belajar Siswa Sma Negeri Unggul Kota Subulussalam", Retrieved from: https://ojs.unimal.ac.id/averrous/article/view/3040
 
 [3] S. Pratama, I. Iswandi, A. Sevtian, T.P. Anjani, "Penerapan Data Mining Untuk Memprediksi Prestasi Akademik Mahasiswa Menggunakan Algoritma C4.5 dengan CRISP-DM", Retrieved from: https://www.researchgate.net/publication/372790243_Penerapan_Data_Mining_Untuk_Memprediksi_Prestasi_Akademik_Mahasiswa_Menggunakan_Algoritma_C45_dengan_CRISP-DM
 
-[4] D. Kučak, V. Juričić, G. Đambić, "MACHINE LEARNING IN EDUCATION - A SURVEY OF CURRENT RESEARCH TRENDS", Retrieved from: https://www.daaam.info/Downloads/Pdfs/proceedings/proceedings_2018/059.pdf
+[4] D. Kučak, V. Juričić, G. Đambić, "Machine Learning in Education – a Survey of Current Research Trends", Retrieved from: https://www.daaam.info/Downloads/Pdfs/proceedings/proceedings_2018/059.pdf
 
-[5] S.A. Guno, "PENGGUNAAN MACHINE LEARNING UNTUK MENGIDENTIFIKASI FAKTOR-FAKTOR YANG MEMPENGARUHI KEMAMPUAN BERPIKIR KREATIF MATEMATIS SISWA", Retrieved from: https://repository.uinjkt.ac.id/dspace/bitstream/123456789/78230/1/Skripsi_Sadewo_Aji_Guno_111170170000015%20.pdf
+[5] S.A. Guno, "Penggunaan Machine Learning Untuk Mengidentifikasi Faktor-Faktor Yang Mempengaruhi Kemampuan Berpikir Kreatif Matematis Siswa", Retrieved from: https://repository.uinjkt.ac.id/dspace/bitstream/123456789/78230/1/Skripsi_Sadewo_Aji_Guno_111170170000015%20.pdf
