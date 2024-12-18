@@ -23,6 +23,7 @@ Dengan demikian, proyek ini bertujuan untuk mengembangkan model *machine learnin
 ### Problem Statements
 
 Berdasarkan latar belakang yang telah dijelaskan di atas, maka diperoleh rumusan masalah yang akan diselesaikan pada proyek ini, yaitu:
+
 1. Apa faktor-faktor yang memengaruhi indeks prestasi siswa?
 2. Bagaimana cara melakukan tahap persiapan data sebelum digunakan untuk membuat model *machine learning*?
 3. Bagaimana cara membuat model *machine learning* untuk melakukan prediksi indeks prestasi siswa?
@@ -30,6 +31,7 @@ Berdasarkan latar belakang yang telah dijelaskan di atas, maka diperoleh rumusan
 ### Goals
 
 Berdasarkan problem statements, berikut tujuan yang ingin dicapai pada proyek ini, yaitu:
+
 1. Mengetahui faktor-faktor yang memengaruhi indeks prestasi siswa.
 2. Mengetahui tahap-tahap persiapan data sebelum digunakan untuk membuat model *machine learning*.
 3. Membuat model *machine learning* yang dapat melakukan prediksi indeks prestasi siswa.
@@ -48,8 +50,50 @@ Berdasarkan problem statements, berikut tujuan yang ingin dicapai pada proyek in
 
 Dataset yang digunakan untuk memprediksi indeks prestasi pada siswa diambil dari [`Kaggle`](https://www.kaggle.com/) Dataset [`Student Performance (Multiple Linear Regression)`](https://www.kaggle.com/datasets/nikhil7280/student-performance-multiple-linear-regression) yang dipublikasikan oleh [`nikhil7280`](https://www.kaggle.com/nikhil7280) dengan usability score `10/10`. Dataset ini memiliki `10.000` baris dengan `6` kolom dan terdiri dari `1` file csv.
 
+### Informasi Dataset
+
+Pertama, kita akan melihat informasi dataset menggunakan fungsi `.info()` untuk mengetahui tipe data dari setiap kolom.
+
+```python
+df.info()
+```
+
+Berikut adalah hasil dari informasi dataset:
+
+<p align="center">
+  <img src="Assets/image-25.png" alt="Data Understanding" width="75%">
+</p>
+
+Dari hasil di atas, terlihat bahwa:
+
+1. Dataset ini memiliki `10.000` baris dan `6` kolom.
+2. Kolom `Extracurricular Activities` bertipe object, kolom `Performance Index` bertipe float64, dan kolom `Hours Studied`, `Previous Scores`, `Sleep Hours`, `Sample Question Papers Practiced` bertipe int64.
+3. Tidak ada nilai yang hilang pada dataset ini.
+
+### Deskripsi Statistik Data
+
+Selanjutnya, kita akan melihat deskripsi statistik data menggunakan fungsi `.describe()` untuk mengetahui statistik deskriptif dari setiap kolom.
+
+```python
+df.describe()
+```
+
+Berikut adalah hasil dari deskripsi statistik data:
+
+<p align="center">
+  <img src="Assets/image-26.png" alt="Data Understanding" width="75%">
+</p>
+
+Dari hasil di atas, terlihat bahwa:
+
+1. Rata-rata dari variabel `Hours Studied` adalah 4.9, `Previous Scores` adalah 69.5, `Sleep Hours` adalah 6.5, `Sample Question Papers Practiced` adalah 4.5, dan `Performance Index` adalah 55.2.
+2. Nilai minimum dari variabel `Hours Studied` adalah 1, `Previous Scores` adalah 40, `Sleep Hours` adalah 4, `Sample Question Papers Practiced` adalah 0, dan `Performance Index` adalah 10.
+3. Nilai maksimum dari variabel `Hours Studied` adalah 9, `Previous Scores` adalah 99, `Sleep Hours` adalah 9, `Sample Question Papers Practiced` adalah 9, dan `Performance Index` adalah 100.
+
 ### Variabel-variabel pada dataset Student Performance
+
 Dataset ini memiliki `17` variabel dengan keterangan sebagai berikut:
+
 Variabel | Keterangan
 ----------|----------
 Hours Studied | Jumlah total jam yang dihabiskan untuk belajar oleh setiap siswa.
@@ -66,27 +110,51 @@ Nilai | Keterangan
 Yes | Siswa berpartisipasi dalam kegiatan ekstrakurikuler.
 No | Siswa tidak berpartisipasi dalam kegiatan ekstrakurikuler.
 
-### Data Cleaning
+### Pengecekan Missing Values
 
-Setelah diperiksa apakah terdapat kolom yang bernilai null, hasilnya adalah tidak ada. Sementara itu, setelah diperiksa apakah terdapat data duplikat, ditemukan 127 duplikat, sehingga data duplikat ini dihapus. Oleh karena itu, setelah dilakukan pembersihan data, diperoleh deskripsi statistik data numerik sebagai berikut:
-| Statistic   | Hours Studied | Previous Scores | Sleep Hours | Sample Question Papers Practiced | Performance Index |
-|-------------|---------------|------------------|-------------|------------------------------------|-------------------|
-| count       | 9873.000000   | 9873.000000      | 9873.000000 | 9873.000000                        | 9873.000000       |
-| mean        | 4.992100      | 69.441102        | 6.531652    | 4.583004                           | 55.216651         |
-| std         | 2.589081      | 17.325601        | 1.697683    | 2.867202                           | 19.208570         |
-| min         | 1.000000      | 40.000000        | 4.000000    | 0.000000                           | 10.000000         |
-| 25%         | 3.000000      | 54.000000        | 5.000000    | 2.000000                           | 40.000000         |
-| 50% (median)| 5.000000      | 69.000000        | 7.000000    | 5.000000                           | 55.000000         |
-| 75%         | 7.000000      | 85.000000        | 8.000000    | 7.000000                           | 70.000000         |
-| max         | 9.000000      | 99.000000        | 9.000000    | 9.000000                           | 100.000000        |
+Pertama, kita akan mengecek apakah terdapat nilai yang hilang pada dataset. Hal ini dilakukan dengan menggunakan fungsi `.isnull().sum()` untuk mengetahui jumlah nilai yang hilang pada setiap kolom.
 
-Dari hasil tersebut, dapat disimpulkan bahwa rata-rata dari variabel `Hours Studied` adalah 4.9, `Previous Scores` adalah 69.5, `Sleep Hours` adalah 6.5, `Sample Question Papers Practiced` adalah 4.5, dan `Performance Index` adalah 55.2.
+```python
+pd.DataFrame({'Nilai yang Kosong':df.isnull().sum()})
+```
+
+Berikut adalah hasil dari pengecekan nilai yang hilang pada dataset:
+
+| Variabel | Nilai yang Kosong |
+|----------|-------------------|
+| Hours Studied | 0 |
+| Previous Scores | 0 |
+| Extracurricular Activities | 0 |
+| Sleep Hours | 0 |
+| Sample Question Papers Practiced | 0 |
+| Performance Index | 0 |
+
+Setelah diperiksa apakah terdapat kolom yang bernilai null, hasilnya menunjukkan bahwa tidak ada nilai yang hilang pada dataset ini. Sehingga, kita dapat melanjutkan ke tahap berikutnya.
+
+### Pengecekan Data Duplikat
+
+Selanjutnya, kita akan mengecek apakah terdapat data duplikat pada dataset. Hal ini dilakukan dengan menggunakan fungsi `.duplicated().sum()` untuk mengetahui jumlah data duplikat pada dataset.
+
+```python
+df.duplicated().sum()
+```
+
+Berikut adalah hasil dari pengecekan data duplikat pada dataset:
+
+<p align="center">
+  <img src="Assets/image-22.png" alt="Data Understanding" width="75%">
+</p>
+
+Setelah diperiksa apakah terdapat data duplikat, ditemukan 127 data duplikat, sehingga data duplikat akan dihapus dari dataset pada tahap *Data Preparation*. Sehingga, kita dapat melanjutkan ke tahap berikutnya.
+
+### Pengecekan Data Outlier
+
+Selanjutnya, kita akan mengecek apakah terdapat data outlier pada dataset. Hal ini dilakukan dengan menggunakan boxplot untuk melihat distribusi data pada setiap kolom.
 
 <p align="center">
   <img src="Assets/image.png" alt="Data Understanding" width="100%">
-</p>
 
-Dari hasil di atas, terlihat bahwa tidak ada data outlier pada dataset ini. Sehingga, kita dapat melanjutkan ke tahap berikutnya.
+Dari hasil di atas, terlihat bahwa tidak ada data outlier pada dataset ini. Oleh karena itu, kita dapat melanjutkan ke tahap berikutnya.
 
 ### Univariate Analysis
 
@@ -110,6 +178,7 @@ Selanjutnya, kita akan memvisualisasikan kolom-kolom numerikal untuk melihat dis
 </p>
 
 Gambar di atas dapat diinterpretasikan sebagai berikut:
+
 1. Plot Histogram dari `Jumlah Jam Belajar`, `Nilai sebelumnya`, `Jumlah Jam Tidur`, dan `Jumlah Soal Latihan Yang Dikerjakan` tidak berdistribusi normal.
 2. Plot Histogram dari `Indeks Prestasi` cukup berdistribusi normal.
 
@@ -194,6 +263,7 @@ Data di atas menunjukkan bahwa siswa yang melakukan aktivitas ekstrakurikuler me
 </p>
 
 Dari heatmap di atas, dapat dilihat bahwa `Indeks Prestasi` memiliki:
+
 1. Korelasi positif yang kuat dengan `Nilai Sebelumnya`.
 2. Korelasi positif yang lemah terhadap `Jumlah Jam Belajar`.
 3. Korelasi positif yang sangat lemah terhadap `Jumlah Jam Tidur` dan `Jumlah Soal Latihan Yang Dikerjakan`.
@@ -204,18 +274,63 @@ Dari heatmap di atas, dapat dilihat bahwa `Indeks Prestasi` memiliki:
   <img src="Assets/image-17.png" alt="Data Preparation" width="100%">
 </p>
 
-Pertama, akan diubah nilai-nilai kategorikal pada data menggunakan fungsi `.map()` sehingga menjadi nilai-nilai numerik agar dapat dilatih dengan *machine learning*.
+Setelah melakukan *Data Understanding*, dan mengetahui informasi-informasi yang diperlukan, langkah selanjutnya adalah melakukan *Data Preparation*. Pada tahap ini, kita akan membersihkan data duplikat, melakukan encoding kategorikal, dan membagi data menjadi data training dan data testing.
+
+Hal ini dilakukan untuk memastikan bahwa data yang digunakan untuk melatih model *machine learning* adalah data yang baik dan berkualitas.
+
+### Menangani Data Duplikat
+
+Pertama, kita akan mengecek apakah terdapat data duplikat pada dataset. Hal ini dilakukan dengan menggunakan fungsi `.duplicated().sum()` untuk mengetahui jumlah data duplikat pada dataset.
+
+```python
+df.duplicated().sum()
+```
+
+Berikut adalah hasil dari pengecekan data duplikat pada dataset:
+
+<p align="center">
+  <img src="Assets/image-22.png" alt="Data Understanding" width="75%">
+</p>
+
+Setelah diperiksa apakah terdapat data duplikat, ditemukan 127 duplikat, sehingga data duplikat akan dihapus dari dataset menggunakan fungsi `.drop_duplicates()`.
+
+```python
+df = df.drop_duplicates(inplace=True)
+```
+
+Setelah data duplikat dihapus, kita akan mengecek kembali informasi dataset untuk memastikan bahwa data duplikat telah dihapus.
+
+```python
+df.info()
+```
+
+Berikut adalah hasil dari pengecekan informasi dataset setelah data duplikat dihapus:
+
+<p align="center">
+  <img src="Assets/image-23.png" alt="Data Understanding" width="75%">
+</p>
+
+Dari hasil di atas, terlihat bahwa 127 data duplikat telah dihapus dari dataset. Dari yang sebelumnya memiliki `10.000` baris, sekarang dataset ini memiliki `9.873` baris.
 
 ### Encoding Kategorikal
 
+Selanjutnya, akan diubah nilai-nilai kategorikal pada data menggunakan fungsi `.map()` sehingga menjadi nilai-nilai numerik agar dapat dilatih dengan *machine learning*.
+
 Encoding Kategorikal dilakukan terhadap 1 variabel, yaitu:
+
 * `Extracurricular Activities` (Apakah siswa berpartisipasi dalam kegiatan ekstrakurikuler).
 
-Karena nilai-nilai pada keempat variabel tersebut hanya `yes` (iya) atau `no` (tidak). Encoding ini dilakukan menggunakan `.map()`dengan cara mengganti nilai `yes` dengan `1`, dan nilai `no` dengan `0`.
+Karena nilai-nilai pada variabel tersebut hanya `yes` (iya) atau `no` (tidak). Encoding ini dilakukan menggunakan `.map()`dengan cara mengganti nilai `yes` dengan `1`, dan nilai `no` dengan `0`.
 
 ### Data Training dan Testing
 
-Tahapan ini dilakukan untuk membagi data menjadi 2, yaitu data training dan testing. Data training digunakan untuk melatih model dengan data yang ada, sedangkan data testing digunakan untuk menguji model yang dibuat menggunakan data yang belum dilatih. Pembagian data ini dilakukan dengan perbandingan 80% : 20% untuk data training dan data testing menggunakan `train_test_split` dari library sklearn.
+Tahapan ini dilakukan untuk membagi data menjadi 2, yaitu data training dan testing. Data training digunakan untuk melatih model dengan data yang ada, sedangkan data testing digunakan untuk menguji model yang dibuat menggunakan data yang belum dilatih. Pembagian data ini dilakukan dengan perbandingan 80%:20% untuk data training dan data testing menggunakan `train_test_split` dari library sklearn.
+
+<p align="center">
+  <img src="Assets/image-24.png" alt="Data Understanding" width="75%">
+</p>
+
+Dari hasil di atas, terlihat bahwa data training memiliki `7.898` baris dan `5` kolom pada `X_train`, serta `7.898` baris pada `y_train`. Sedangkan data testing memiliki `1.975` baris dan `5` kolom pada `X_test`, serta `1.975` baris pada `y_test`.
 
 ## Modeling
 
@@ -269,7 +384,8 @@ Pada proyek ini, penilaian model menggunakan `MSE` dan `RMSE` sebagai metrik eva
 
 $$MSE = \frac{\Sigma (y_i - \hat{y_i})^2}{n}$$
 
-dengan:
+Dengan:
+
 - $y_i$ adalah nilai aktual
 - $\hat{y_i}$ adalah nilai prediksi
 - $n$ adalah jumlah data
@@ -280,7 +396,7 @@ dengan:
 
 $$RMSE = \sqrt{\frac{\Sigma (y_i - \hat{y_i})^2}{n}}$$
 
-dengan:
+Dengan:
 
 - $y_i$ adalah nilai aktual
 - $\hat{y_i}$ adalah nilai prediksi
