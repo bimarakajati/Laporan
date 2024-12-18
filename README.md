@@ -46,7 +46,7 @@ Berdasarkan problem statements, berikut tujuan yang ingin dicapai pada proyek in
   <img src="Assets/image-16.png" alt="Data Understanding" width="100%">
 </p>
 
-Dataset yang digunakan untuk memprediksi indeks prestasi pada siswa diambil dari platform [kaggle](https://www.kaggle.com/) yang dipublikasikan oleh `nikhil7280` dengan usability score `10/10`. Dataset ini memiliki `10.000` baris dengan `6` kolom dan terdiri dari `1` file csv.
+Dataset yang digunakan untuk memprediksi indeks prestasi pada siswa diambil dari [`Kaggle`](https://www.kaggle.com/) Dataset [`Student Performance (Multiple Linear Regression)`](https://www.kaggle.com/datasets/nikhil7280/student-performance-multiple-linear-regression) yang dipublikasikan oleh [`nikhil7280`](https://www.kaggle.com/nikhil7280) dengan usability score `10/10`. Dataset ini memiliki `10.000` baris dengan `6` kolom dan terdiri dari `1` file csv.
 
 ### Variabel-variabel pada dataset Student Performance
 Dataset ini memiliki `17` variabel dengan keterangan sebagai berikut:
