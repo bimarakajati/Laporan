@@ -92,7 +92,7 @@ Dari hasil di atas, terlihat bahwa:
 
 ### Variabel-variabel pada dataset Student Performance
 
-Dataset ini memiliki `17` variabel dengan keterangan sebagai berikut:
+Dataset ini memiliki `6` variabel dengan keterangan sebagai berikut:
 
 Variabel | Keterangan
 ----------|----------
