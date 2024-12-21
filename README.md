@@ -110,15 +110,15 @@ Nilai | Keterangan
 Yes | Siswa berpartisipasi dalam kegiatan ekstrakurikuler.
 No | Siswa tidak berpartisipasi dalam kegiatan ekstrakurikuler.
 
-### Pengecekan Missing Values
+### Memeriksa Missing Values
 
-Pertama, kita akan mengecek apakah terdapat nilai yang hilang pada dataset. Hal ini dilakukan dengan menggunakan fungsi `.isnull().sum()` untuk mengetahui jumlah nilai yang hilang pada setiap kolom.
+Pertama, kita akan memeriksa apakah terdapat nilai yang hilang pada dataset. Hal ini dilakukan dengan menggunakan fungsi `.isnull().sum()` untuk mengetahui jumlah nilai yang hilang pada setiap kolom.
 
 ```python
 pd.DataFrame({'Nilai yang Kosong':df.isnull().sum()})
 ```
 
-Berikut adalah hasil dari pengecekan nilai yang hilang pada dataset:
+Berikut adalah hasil dari pemeriksaan nilai yang hilang pada dataset:
 
 | Variabel | Nilai yang Kosong |
 |----------|-------------------|
@@ -131,15 +131,15 @@ Berikut adalah hasil dari pengecekan nilai yang hilang pada dataset:
 
 Setelah diperiksa apakah terdapat kolom yang bernilai null, hasilnya menunjukkan bahwa tidak ada nilai yang hilang pada dataset ini. Sehingga, kita dapat melanjutkan ke tahap berikutnya.
 
-### Pengecekan Data Duplikat
+### Memeriksa Data Duplikat
 
-Selanjutnya, kita akan mengecek apakah terdapat data duplikat pada dataset. Hal ini dilakukan dengan menggunakan fungsi `.duplicated().sum()` untuk mengetahui jumlah data duplikat pada dataset.
+Selanjutnya, kita akan memeriksa apakah terdapat data duplikat pada dataset. Hal ini dilakukan dengan menggunakan fungsi `.duplicated().sum()` untuk mengetahui jumlah data duplikat pada dataset.
 
 ```python
 df.duplicated().sum()
 ```
 
-Berikut adalah hasil dari pengecekan data duplikat pada dataset:
+Berikut adalah hasil dari pemeriksaan data duplikat pada dataset:
 
 <p align="center">
   <img src="Assets/image-22.png" alt="Data Understanding" width="75%">
@@ -147,9 +147,9 @@ Berikut adalah hasil dari pengecekan data duplikat pada dataset:
 
 Setelah diperiksa apakah terdapat data duplikat, ditemukan 127 data duplikat, sehingga data duplikat akan dihapus dari dataset pada tahap *Data Preparation*. Sehingga, kita dapat melanjutkan ke tahap berikutnya.
 
-### Pengecekan Data Outlier
+### Memeriksa Data Outlier
 
-Selanjutnya, kita akan mengecek apakah terdapat data outlier pada dataset. Hal ini dilakukan dengan menggunakan boxplot untuk melihat distribusi data pada setiap kolom.
+Selanjutnya, kita akan memeriksa apakah terdapat data outlier pada dataset. Hal ini dilakukan dengan menggunakan boxplot untuk melihat distribusi data pada setiap kolom.
 
 <p align="center">
   <img src="Assets/image.png" alt="Data Understanding" width="100%">
@@ -274,19 +274,40 @@ Dari heatmap di atas, dapat dilihat bahwa `Indeks Prestasi` memiliki:
   <img src="Assets/image-17.png" alt="Data Preparation" width="100%">
 </p>
 
-Setelah melakukan *Data Understanding*, dan mengetahui informasi-informasi yang diperlukan, langkah selanjutnya adalah melakukan *Data Preparation*. Pada tahap ini, kita akan membersihkan data duplikat, melakukan encoding kategorikal, dan membagi data menjadi data training dan data testing.
+Setelah melakukan *Data Understanding*, dan mengetahui informasi-informasi yang diperlukan, langkah selanjutnya adalah melakukan *Data Preparation*. Pada tahap ini, kita akan membersihkan data dari nilai yang hilang, menghapus data duplikat, menangani outlier, melakukan encoding kategorikal, dan membagi data menjadi data training dan data testing.
 
 Hal ini dilakukan untuk memastikan bahwa data yang digunakan untuk melatih model *machine learning* adalah data yang baik dan berkualitas.
 
+### Menangani Missing Values
+
+Pertama, kita akan memeriksa apakah terdapat nilai yang hilang pada dataset. Hal ini dilakukan dengan menggunakan fungsi `.isnull().sum()` untuk mengetahui jumlah nilai yang hilang pada setiap kolom.
+
+```python
+pd.DataFrame({'Nilai yang Kosong':df.isnull().sum()})
+```
+
+Berikut adalah hasil dari pemeriksaan nilai yang hilang pada dataset:
+
+| Variabel | Nilai yang Kosong |
+|----------|-------------------|
+| Hours Studied | 0 |
+| Previous Scores | 0 |
+| Extracurricular Activities | 0 |
+| Sleep Hours | 0 |
+| Sample Question Papers Practiced | 0 |
+| Performance Index | 0 |
+
+Dari hasil di atas, terlihat bahwa tidak ada nilai yang hilang pada dataset ini. Sehingga, kita tidak perlu melakukan penanganan nilai yang hilang pada dataset ini dan dapat melanjutkan ke tahap berikutnya.
+
 ### Menangani Data Duplikat
 
-Pertama, kita akan mengecek apakah terdapat data duplikat pada dataset. Hal ini dilakukan dengan menggunakan fungsi `.duplicated().sum()` untuk mengetahui jumlah data duplikat pada dataset.
+Selanjutnya, kita akan memeriksa apakah terdapat data duplikat pada dataset. Hal ini dilakukan dengan menggunakan fungsi `.duplicated().sum()` untuk mengetahui jumlah data duplikat pada dataset.
 
 ```python
 df.duplicated().sum()
 ```
 
-Berikut adalah hasil dari pengecekan data duplikat pada dataset:
+Berikut adalah hasil dari pemeriksaan data duplikat pada dataset:
 
 <p align="center">
   <img src="Assets/image-22.png" alt="Data Understanding" width="75%">
@@ -298,19 +319,29 @@ Setelah diperiksa apakah terdapat data duplikat, ditemukan 127 duplikat, sehingg
 df = df.drop_duplicates(inplace=True)
 ```
 
-Setelah data duplikat dihapus, kita akan mengecek kembali informasi dataset untuk memastikan bahwa data duplikat telah dihapus.
+Setelah data duplikat dihapus, kita akan memeriksa kembali informasi dataset untuk memastikan bahwa data duplikat telah dihapus.
 
 ```python
 df.info()
 ```
 
-Berikut adalah hasil dari pengecekan informasi dataset setelah data duplikat dihapus:
+Berikut adalah hasil dari pemeriksaan informasi dataset setelah data duplikat dihapus:
 
 <p align="center">
   <img src="Assets/image-23.png" alt="Data Understanding" width="75%">
 </p>
 
 Dari hasil di atas, terlihat bahwa 127 data duplikat telah dihapus dari dataset. Dari yang sebelumnya memiliki `10.000` baris, sekarang dataset ini memiliki `9.873` baris.
+
+### Menangani Outlier
+
+Selanjutnya, kita akan memeriksa apakah terdapat data outlier pada dataset. Hal ini dilakukan dengan menggunakan boxplot untuk melihat distribusi data pada setiap kolom.
+
+<p align="center">
+  <img src="Assets/image.png" alt="Data Understanding" width="100%">
+</p>
+
+Dari hasil di atas, terlihat bahwa tidak ada data outlier pada dataset ini. Oleh karena itu, kita tidak perlu melakukan penanganan data outlier pada dataset ini dan dapat melanjutkan ke tahap berikutnya.
 
 ### Encoding Kategorikal
 
